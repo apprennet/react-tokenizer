@@ -2,8 +2,12 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import Tokenizer from '../../src/Tokenizer';
 import TokenCell from '../../src/TokenCell';
+
+import SimpleExample from './SimpleExample';
+import CustomTokenCellRendererExample from './CustomTokenCellRendererExample';
 
 let App = React.createClass({
 
@@ -15,10 +19,6 @@ let App = React.createClass({
     return (
       <section className="app">
         <h1>react-tokenizer</h1>
-        <Tokenizer
-          tokens={this.state.tokens}
-          tokenize={this._tokenize}
-          removeToken={this._removeToken} />
         <p>Try the following: </p>
         <ul>
           <li>Enter in text, followed by the 'enter', 'tab', or 'comma' keys</li>
@@ -27,50 +27,12 @@ let App = React.createClass({
           <li>Input the string "magic-input"</li>
         </ul>
 
-        <h2>Here are the tokens</h2>
-        <ol>
-          {
-            this.state.tokens.map(function(token, index) {
-              return <li key={index}>{token}</li>;
-            })
-          }
-        </ol>
+        <SimpleExample />
+        <CustomTokenCellRendererExample />
+
       </section>
     );
-  },
-
-  _tokenize(data) {
-    let tokens = this.state.tokens;
-
-    // We can perform some sort of validation logic on the entered data
-    // OR even transform the input
-    if (data === 'magic-input') {
-      console.log('You have done something magical!');
-      tokens.push('Abracadabra!');
-      this.setState({ tokens: tokens });
-      return;
-    }
-
-    if (Array.isArray(data)) {
-      tokens = tokens.concat(data)
-    } else {
-      tokens.push(data);
-    }
-
-    this.setState({ tokens: tokens });
-  },
-
-  _removeToken(token) {
-    let tokens = this.state.tokens,
-        index  = tokens.indexOf(token);
-
-    if (index !== -1) {
-      tokens.splice(index, 1);
-    }
-
-    this.setState({ tokens: tokens });
   }
-
 });
 
 ReactDOM.render(<App />, document.getElementById('app'));
