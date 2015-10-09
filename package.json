@@ -63,5 +63,8 @@
     "tokens",
     "input",
     "textarea"
-  ]
+  ],
+  "dependencies": {
+    "react-input-autosize": "^0.5.3"
+  }
 }

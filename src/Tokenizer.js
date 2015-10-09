@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AutosizeInput from 'react-input-autosize';
 import TokenCell from './TokenCell';
 
 const KEYS = {
@@ -35,7 +36,11 @@ export default React.createClass({
   },
 
   componentDidUpdate() {
-    this.refs.tokenInput.focus();
+    this._handleFocusInputField();
+  },
+
+  componentDidUpdate() {
+    this._handleFocusInputField();
   },
 
   render() {
@@ -46,16 +51,17 @@ export default React.createClass({
     });
 
     return (
-      <div className="rt-tokenizer">
+      <div className="rt-tokenizer" onClick={this._handleFocusInputField}>
         {tokens}
-
-        <textarea
-          className="rt-tokenizer__user-input"
+        <AutosizeInput
+          type="text"
           ref="tokenInput"
+          className="rt-tokenizer__user-input"
           value={this.state.userInput}
           onKeyDown={this._handleKeyDown}
           onPaste={this._handlePaste}
-          onChange={this._handleChange}></textarea>
+          onChange={this._handleChange}
+        />
       </div>
     );
   },
@@ -98,6 +104,10 @@ export default React.createClass({
         tokens    = data.split("\n");
 
     this.props.tokenize(tokens);
+  },
+
+  _handleFocusInputField() {
+    React.findDOMNode(this.refs.tokenInput).getElementsByTagName('input')[0].focus();
   }
 
 });
