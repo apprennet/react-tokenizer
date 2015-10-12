@@ -1,10 +1,15 @@
+// Default styles for react-tokenizer
+
+@import './react-tokenizer-settings';
+
 .rt-tokenizer {
-  border: 4px solid #ddd;
-  border-radius: 3px;
+  border: $rt-tokenizer-border-width $rt-tokenizer-border-style $rt-tokenizer-border-color;
+  border-radius: $rt-tokenizer-border-radius;
   cursor: text;
   display: block;
   padding: 5px;
-  width: 100%; }
+  width: 100%;
+}
 
 .rt-tokenizer__user-input {
   border: 0;
@@ -13,34 +18,40 @@
   font-size: 16px;
   height: 28px;
   padding: 4px;
-  resize: none; }
+  resize: none;
+}
 
 .rt-tokenizer__user-input > input,
 .rt-tokenizer__user-input > input:focus {
   border: 0;
   box-shadow: none;
-  outline: 0; }
+  outline: 0;
+}
 
 .rt-tokenizer__user-input:focus {
-  outline: 0; }
+  outline: 0;
+}
 
 .rt-cell {
-  background-color: #ddd;
-  border: 1px solid #bbb;
-  border-radius: 3px;
-  color: #444;
+  background-color: $rt-cell-background-color;
+  border: $rt-cell-border-width $rt-cell-border-style $rt-cell-border-color;
+  border-radius: $rt-cell-border-radius;
+  color: $rt-cell-color;
   display: inline-block;
   margin: 0 3px 3px 0;
-  padding: 4px 8px; }
+  padding: 4px 8px;
+}
 
 .rt-cell__content,
 .rt-cell__delete {
   display: inline-block;
   margin: 0;
-  vertical-align: baseline; }
+  vertical-align: baseline;
+}
 
 .rt-cell__delete {
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;
-  margin-left: 8px; }
+  margin-left: 8px;
+}

@@ -7,7 +7,8 @@ var gulp       = require('gulp'),
     watchify   = require('watchify'),
     babelify   = require('babelify'),
     del        = require('del'),
-    babel      = require("gulp-babel");
+    babel      = require("gulp-babel"),
+    sass       = require("gulp-sass");
 
 function _setupBrowserify(path, debug) {
   var b = browserify({
@@ -29,7 +30,7 @@ gulp.task('clean:example', function(done) {
   return del(['example/app.js'], done);
 });
 
-gulp.task('example:dev', ['clean:example'], function() {
+gulp.task('example:dev', ['clean:example', 'sass:watch'], function() {
   var b = _setupBrowserify('./example/js/app.js'),
       w = watchify(b);
 
@@ -61,4 +62,15 @@ gulp.task("build:lib", function () {
   return gulp.src("src/**/*.js")
     .pipe(babel())
     .pipe(gulp.dest("./lib/"));
+});
+
+// build scss
+gulp.task('sass', function () {
+  gulp.src('./scss/react-tokenizer.scss')
+    .pipe(sass.sync().on('error', sass.logError))
+    .pipe(gulp.dest('./example/stylesheets/'));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch('./scss/**/*.scss', ['sass']);
 });
